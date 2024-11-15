@@ -1,0 +1,38 @@
+[
+  {
+    "category": "appliance",
+    "picture": "/assets/samsung.png",
+    "name": "500L Refrigerator",
+    "location": "Kolkata",
+    "resalePrice": 30000,
+    "originalPrice": 90000,
+    "usage": "4 Years",
+    "postedOn": "04-11-2024",
+    "seller": "Sams",
+    "emailVerified": true
+  },
+  {
+    "category": "appliance",
+    "picture": "/assets/lg.png",
+    "name": "6Kg Washing Machine",
+    "location": "Kolkata",
+    "resalePrice": 45000,
+    "originalPrice": 15000,
+    "usage": "5 Years",
+    "postedOn": "04-11-2024",
+    "seller": "Elgu",
+    "emailVerified": false
+  },
+  {
+    "category": "appliance",
+    "picture": "/assets/ifb.png",
+    "name": "3L Micro Woven",
+    "location": "Kolkata",
+    "resalePrice": 30000,
+    "originalPrice": 12000,
+    "usage": "2 Years",
+    "postedOn": "04-11-2024",
+    "seller": "Indu",
+    "emailVerified": true
+  }
+]

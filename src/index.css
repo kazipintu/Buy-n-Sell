@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.menu-horizontal>li:not(.menu-title)>details>ul {
+  border-radius: 0 !important;
+  margin-top: 24px !important;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+}
+
+.custom-pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.custom-pagination .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #007bff;
+  border: 2px solid #ffffff;
+  margin: 0 4px;
+  opacity: 0.5;
+  transition: opacity 0.3s, background-color 0.3s;
+}
+
+.custom-pagination .swiper-pagination-bullet-active {
+  opacity: 1;
+  background-color: #0056b3;
+}
+
+.card-body {
+  padding: 0 0 0 0 !important;
+  row-gap: 0;
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "category": "scooter",
+    "picture": "/assets/aerox.png",
+    "name": "Yamaha Aerox 2023",
+    "location": "Kolkata",
+    "resalePrice": 82000,
+    "originalPrice": 174000,
+    "usage": "1 Year",
+    "postedOn": "04-11-2024",
+    "seller": "Aero",
+    "emailVerified": true
+  },
+  {
+    "category": "scooter",
+    "picture": "/assets/activa.png",
+    "name": "Honda Activa 2022",
+    "location": "Kolkata",
+    "resalePrice": 45000,
+    "originalPrice": 110000,
+    "usage": "2 Years",
+    "postedOn": "04-11-2024",
+    "seller": "Acti",
+    "emailVerified": true
+  },
+  {
+    "category": "scooter",
+    "picture": "/assets/burgman.png",
+    "name": "Suzuki Burgman 2022",
+    "location": "Kolkata",
+    "resalePrice": 75000,
+    "originalPrice": 145000,
+    "usage": "3 Years",
+    "postedOn": "04-11-2024",
+    "seller": "Burg",
+    "emailVerified": false
+  }
+]

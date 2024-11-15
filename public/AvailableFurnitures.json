@@ -1,0 +1,38 @@
+[
+  {
+    "category": "furniture",
+    "picture": "/assets/bed.png",
+    "name": "Queen-Double-Bed",
+    "location": "Kolkata",
+    "resalePrice": 32000,
+    "originalPrice": 58000,
+    "usage": "5 Years",
+    "postedOn": "04-11-2024",
+    "seller": "Bedi",
+    "emailVerified": false
+  },
+  {
+    "category": "furniture",
+    "picture": "/assets/dining.png",
+    "name": "Dining-Table",
+    "location": "Kolkata",
+    "resalePrice": 25000,
+    "originalPrice": 70000,
+    "usage": "6 Years",
+    "postedOn": "04-11-2024",
+    "seller": "Dini",
+    "emailVerified": true
+  },
+  {
+    "category": "furniture",
+    "picture": "/assets/sofa.png",
+    "name": "Sofaset",
+    "location": "Kolkata",
+    "resalePrice": 60000,
+    "originalPrice": 150000,
+    "usage": "4 Years",
+    "postedOn": "04-11-2024",
+    "seller": "Sofi",
+    "emailVerified": true
+  }
+]
