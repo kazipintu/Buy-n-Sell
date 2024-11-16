@@ -6,18 +6,17 @@ import Loader from '../shared/Loading/Loader';
 
 const BuyerRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
-  const [isBuyer, isBuyerLoading] = useBuyer(user?.email)
-
+  const [isBuyer, isBuyerLoading] = useBuyer(user?.email);  // Make sure useBuyer is working as expected
   const location = useLocation();
 
   if (loading || isBuyerLoading) {
-    return <Loader/>;
+    return <Loader />;
   }
 
   if (user && isBuyer) {
-    return children;
+    return children;  // Allow access if the user is a buyer
   }
-  return <Navigate to="/" state={{ from: location }} replace />
+  return <Navigate to="/" state={{ from: location }} replace />;
 };
 
 export default BuyerRoute;

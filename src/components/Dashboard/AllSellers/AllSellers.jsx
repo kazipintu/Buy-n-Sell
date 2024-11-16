@@ -61,15 +61,15 @@ const AllSellers = () => {
   };
 
 
-  // ==== Delete/ Remove seller send to back-end to delete from db ==== //
+  // ==== Delete/ Remove seller, send to back-end to delete from db ==== //
   const handleDelete = (id) => {
     if (id) {
       Swal.fire({
         title: 'Are you sure?',
-        text: "You want to verify this seller?",
+        text: "You want to delete this seller?",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, verify it!',
+        confirmButtonText: 'Yes, delete seller!',
       }).then((result) => {
         if (result.isConfirmed) {
           fetch(`http://localhost:5000/sellers/${id}`, {
@@ -82,18 +82,16 @@ const AllSellers = () => {
                 // Refetch sellers data after successful verification
                 refetchSellers(); // This will reload the sellers list after verification
               } else {
-                toast.error('Verification failed!');
+                toast.error('Deletion failed!');
               }
             })
-            .catch((error) => toast.error('Verification error', error));
+            .catch((error) => toast.error('Deletion error', error));
         }
       });
     } else {
       Swal.fire({ icon: 'error', title: 'Oops...', text: 'Something went wrong!' });
     }
   };
-
-
 
 
   return (
@@ -120,7 +118,7 @@ const AllSellers = () => {
                   <td>{seller?.email}</td>
                   <td>
                     {seller?.emailVerified === true
-                      ? <button className='btn btn-accent'>Verified</button>
+                      ? (<button className='btn btn-accent'>Verified</button>)
                       : (<button onClick={() => handleVerifySeller(seller?._id)} className="btn btn-neutral text-white">Verify</button>)
                     }
                   </td>
