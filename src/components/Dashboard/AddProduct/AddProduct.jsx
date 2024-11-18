@@ -1,32 +1,45 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const AddProduct = () => {
+
+  const { user } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const form = event.target;
 
+    const productName = form.productName.value;
     const category = form.category.value;
-    const name = form.name.value;
-    const location = form.location.value;
-    const resalePrice = form.resalePrice.value;
+    const details = form.details.value;
     const condition = form.condition.value;
-    const mobile = form.mobile.value;
-    const sellerEmail = form.sellerEmail.value;
+    const howOld = form.howOld.value;
+    const location = form.location.value;
+    const originalPrice = form.originalPrice.value;
+    const offerPrice = form.offerPrice.value;
     const postedOn = form.postedOn.value;
+    const mobile = form.mobile.value;
+    const sellerName = form.sellerName.value;
+    const sellerEmail = form.sellerEmail.value;
 
     const product = {
+      productName,
       category,
-      name,
-      location,
-      resalePrice,
+      details,
       condition,
+      howOld,
+      location,
+      originalPrice,
+      offerPrice,
+      postedOn,
       mobile,
+      sellerName,
       sellerEmail,
-      postedOn
     };
+
+    //console.log(product);
 
     // Submit the product data to the server
     fetch('http://localhost:5000/products', {
@@ -38,16 +51,17 @@ const AddProduct = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         if (data.acknowledged) {
-          toast.success("Product added successfully!"); // Show success toast
-          form.reset(); // Reset the form after successful submission
+          form.reset();
+          toast.success("Product added successfully!");
         } else {
           toast.error("Failed to add a product!"); // Show error toast
         }
       })
       .catch((error) => {
-        toast.error("There was an error with the submission!"); // Show error toast if fetch fails
+        //console.error("Error submitting booking:", error);
+        toast.error("An error occurred while posting the data.");
       });
   };
 
@@ -56,6 +70,11 @@ const AddProduct = () => {
       <div className="card bg-base-100 shadow-2xl p-4">
         <form onSubmit={handleSubmit} className="card-body">
           <h3 className="text-center text-[20px] font-semibold pb-4">Add a New Product</h3>
+
+          {/* Product Name */}
+          <div className="form-control pb-2">
+            <input type="text" name="productName" placeholder="Product name" className="input input-bordered" required />
+          </div>
 
           {/* Product Category */}
           <div className="form-control pb-2">
@@ -67,19 +86,9 @@ const AddProduct = () => {
             </select>
           </div>
 
-          {/* Product Name */}
+          {/* Product Details */}
           <div className="form-control pb-2">
-            <input type="text" name="name" placeholder="Product name" className="input input-bordered" required />
-          </div>
-
-          {/* Location */}
-          <div className="form-control pb-2">
-            <input type="text" name="location" placeholder="Location" className="input input-bordered" required />
-          </div>
-
-          {/* Product Price */}
-          <div className="form-control pb-2">
-            <input type="number" name="resalePrice" placeholder="Product price" className="input input-bordered" required />
+            <textarea type="text" name="details" placeholder="Product details" className="input input-bordered" required />
           </div>
 
           {/* Product Condition */}
@@ -92,18 +101,44 @@ const AddProduct = () => {
             </select>
           </div>
 
-          {/* Mobile Number */}
+          {/* Procduct age */}
+          <div className="form-control pb-2">
+            <input type="text" name="howOld" placeholder="Years of use" className="input input-bordered" required />
+          </div>
+
+          {/* Location */}
+          <div className="form-control pb-2">
+            <input type="text" name="location" placeholder="Location" className="input input-bordered" required />
+          </div>
+
+          {/* Product Original Price */}
+          <div className="form-control pb-2">
+            <input type="number" name="originalPrice" placeholder="Buying price" className="input input-bordered" required />
+          </div>
+
+          {/* Product Resale Price */}
+          <div className="form-control pb-2">
+            <input type="number" name="offerPrice" placeholder="Selling price" className="input input-bordered" required />
+          </div>
+
+          {/* Product Posting Date */}
+          <div className="form-control pb-2">
+            <input type="text" name="postedOn" placeholder="Posting date (DD-MM-YYYY)" className="input input-bordered" required />
+          </div>
+
+          {/* Seller Mobile Number */}
           <div className="form-control pb-2">
             <input type="number" name="mobile" placeholder="Mobile number" className="input input-bordered" required />
           </div>
 
+          {/* Seller Name */}
           <div className="form-control pb-2">
-            <input type="email" name="sellerEmail" placeholder="Seller email" className="input input-bordered" required />
+            <input type="text" name="sellerName" value={user?.displayName || ''} disabled placeholder="Seller name" className="input input-bordered" required />
           </div>
 
-          {/* Purchase Year */}
+          {/* Seller Email */}
           <div className="form-control pb-2">
-            <input type="text" name="postedOn" placeholder="Posted on (Date)" className="input input-bordered" required />
+            <input type="email" name="sellerEmail" value={user?.email || ''} disabled placeholder="Seller email" className="input input-bordered" required />
           </div>
 
           {/* Submit Button */}

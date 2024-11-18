@@ -20,6 +20,7 @@ import NotFound from '../components/NotFound/NotFound';
 import AdminRoute from './AdminRoute';
 import SellerRoute from './SellerRoute';
 import BuyerRoute from './BuyerRoute';
+import Payment from '../components/Dashboard/Payment/Payment';
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,13 @@ const router = createBrowserRouter([
         path: "/dashboard/my-orders",
         element: <BuyerRoute>
           <MyOrders />
+        </BuyerRoute>
+      },
+      {
+        path: "/dashboard/payment/:id",
+        loader:({params}) => fetch(`http://localhost:5000/bookings/${params.id}`),
+        element: <BuyerRoute>
+          <Payment />
         </BuyerRoute>
       },
       {

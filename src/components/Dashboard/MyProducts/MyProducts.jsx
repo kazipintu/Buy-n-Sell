@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import Loader from '../../../shared/Loading/Loader';
+import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 const MyProducts = () => {
 
@@ -26,6 +28,44 @@ const MyProducts = () => {
     }
   }, [user?.email]);
 
+
+
+  // ==== Delete/ Remove buyer, send to back-end to delete from db ==== //
+  const handleDelete = (id, category) => {
+    if (id && category) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to delete this product?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete product!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`http://localhost:5000/allProducts/${id}?category=${category}`, {
+            method: 'DELETE',
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.deletedCount > 0) {
+                toast.success('Product removed successfully!');
+                setMyProducts(myProducts.filter((product) => product._id !== id)); // Remove the deleted product from the UI
+              } else {
+                toast.error('Deletion failed!');
+              }
+            })
+            .catch((error) => {
+              console.error('Error deleting product:', error);
+              toast.error('Error deleting product', error)
+            });
+        }
+      });
+    } else {
+      Swal.fire({ icon: 'error', title: 'Oops...', text: 'Something went wrong!' });
+    }
+  };
+
+
+
   if (loading) {
     return <Loader />;
   }
@@ -43,7 +83,7 @@ const MyProducts = () => {
                 <th scope="col">CATEGORY</th>
                 <th scope="col">PRODUCT</th>
                 <th scope="col">PRICE</th>
-                <th scope="col">SELL STATUS</th>
+                <th scope="col">STATUS</th>
                 <th scope="col">ACTION</th>
               </tr>
             </thead>
@@ -51,13 +91,19 @@ const MyProducts = () => {
 
               {
                 myProducts?.map((product, i) => (
-                  <tr key={product._id}>
+                  <tr key={product?._id}>
                     <td>{i + 1}</td>
                     <td>{product?.category}</td>
-                    <td>{product?.name}</td>
-                    <td>{product?.resalePrice}</td>
+                    <td>{product?.productName}</td>
+                    <td>{product?.offerPrice}</td>
                     <td>
-                      {/* {
+                      {product?.booked ? (
+                        <span className="text-green-600">Booked</span>
+                      ) : (
+                        <span className="text-red-600">Available</span>
+                      )}
+                    </td>
+                    {/* {
                         booking?.price && !booking?.paid &&
                         <Link to={`/dashboard/payment/${booking._id}`}><button className='btn btn-sm btn-primary'>Pay</button></Link>
                       }
@@ -65,8 +111,7 @@ const MyProducts = () => {
                         booking?.price && booking?.paid &&
                         <span className='text-green-600'>Paid</span>
                       } */}
-                    </td>
-                    <td><button className="btn btn-error text-white">Remove Product</button></td>
+                    <td><button onClick={() => handleDelete(product?._id, product?.category)} className="btn btn-error text-white">Remove Product</button></td>
                   </tr>
                 ))
               }
