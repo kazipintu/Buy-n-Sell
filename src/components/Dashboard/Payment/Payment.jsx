@@ -7,16 +7,17 @@ import { loadStripe } from '@stripe/stripe-js';
 const stripePromise = loadStripe('pk_test_51QG2DwFqSTGgH4neNrhJNSqULVFMVScGBnUabUAYDlNOQqszeKaRN15TgRaL0IJVIEEwAXZq6G9DPXSKwEJcpJx800WyBBvyEX');
 
 const Payment = () => {
-
-  const booking = useLoaderData()
-  //console.log(booking);
-  const { category, productName, condition, productPrice, buyerName, buyerEmail, meetingLocation
-  } = booking;
+  const booking = useLoaderData();  // Get booking details from loader
+  const { category, productName, condition, productPrice, buyerName, buyerEmail, meetingLocation, _id } = booking;
 
   return (
     <div>
       <h2 className='text-3xl font-semibold'>Payment for: <span className='text-blue-700'>{productName}</span></h2>
-      <p className='mt-3 text-lg'>Please pay <b className='text-red-700'><span >{Number(productPrice)}</span></b></p>
+      <p className='mt-3 text-lg'>
+        Please pay <b className='text-red-700'>
+          <span>{Number(productPrice)}</span> INR
+        </b>
+      </p>
       <div>
         <Elements stripe={stripePromise}>
           <CheckoutForm booking={booking} />
@@ -26,4 +27,4 @@ const Payment = () => {
   );
 };
 
-export default Payment; 
+export default Payment;
